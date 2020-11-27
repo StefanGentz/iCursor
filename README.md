@@ -1,4 +1,4 @@
-# iCursor – An emulation of the awesome iPadOS cursor
+# iCursor – Rebuilding the awesome iPadOS cursor for the web
 
 Author: https://www.linkedin.com/in/stefangentz/
 
