@@ -14,6 +14,8 @@ iCursor, in its current state, simulates Apple’s iPadOS cursor by doing the fo
 - adding smooth transitions between pointer and text cursor,
 - adding an idle-state so that the cursor fades away when not moved and comes back if moved.
 
+Find it also on codepen.io and see it in action:
+[iCursor on codepen.ip](https://codepen.io/stefan-gentz/pen/KKMjYoK)
 
 ## Version
 Current Version: 0.7.20201127
