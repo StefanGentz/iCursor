@@ -1,4 +1,4 @@
-# iCursor – Rebuilding the awesome iPadOS cursor for the web
+# iCursor – An emulation of the awesome iPadOS cursor
 
 Author: https://www.linkedin.com/in/stefangentz/
 
@@ -55,27 +55,32 @@ You can change the size, color, transparency, and many other things.
 
 The variable names are pretty self-explaining, I guess, but here you go with their documentation:
 
-| Variable                | Default                                    | Note                                  |
-|-------------------------|--------------------------------------------|---------------------------------------|
-| $iCursorVersion         | depends                                    | The current version of this script.   |
-| $iCursorID              | cursor                                     | The unique ID of your iCursor.        |
+| Variable                | Default                                        | Note                                  |
+|-------------------------|------------------------------------------------|---------------------------------------|
+| $iCursorVersion         | depends                                        | The current version of this script.   |
+| $iCursorID              | cursor                                         | The unique ID of your iCursor.        |
 | $cursorElement          | ```javascript <div id=\"" + $iCursorID + "\"></div>```    | The iCursor div. |
-| $iCursorColor           | rgba(150,150,150,.75)                      | Use any color you want.               |
-| $iCursorMinHeight       | 24                                         | Minimum height of the cursor in px.   |
-| $iCursorMaxHeight       | 100                                        | Maximum height of the cursor in px.   |
-| $iCursorPointerSize     | 20                                         | Size of the pointer in px             | 
-| $iCursorPointerRadius   | ($iCursorPointerSize / 2)                  | Sets the round corners automatically. |
-| $iCursorOpacity         | 1                                          | 1 = no transparency<br/>0 = full transparency<br/>Use .5 for 50% transparency<br/>Note that any transparency value with add additional transparency if you have defined iCursorColor as an rgba() color with alpha set to < 1 |
-| $iCursorTransitionSpeed | 0.2                                        | How fast iCursor transforms between states |
-| $iCursorTextWidth       | 6                                          | The width of the iCursor text cursor ("I-Beam") |
-| $iCursorTextRadius      | ($iCursorTextWidth / 2)                    | Do not change.                        |
-| $iCursorMixBlendMode    | difference                                 | Value for the CSS mix-blend-mode rule. |
-| $iCursorFilter          | grayscale(1)                               | Use grayscale(1) to apply grayscale. (Doesn't seem to work in all browsers.) | 
-| $iCursorIdleCheck       | true                                       | Set to true, if cursor should hide after $iCursorIdleTime. Set to false to keep the cursor always visible.      | 
-| $iCursorIdleTime        | 3500                                       | Time in ms until the cursor fades away | 
-| $iCursorTimeout         | null                                       | Do not change this!      | 
-| $textElements           | h1, h2, h3, h4, h5, h6, p                  | The HTML elements to which the text cursor applies. Inline Elements are automatically covered and don’t need to be declared explicitly unless you use them not as a child of any of the elements defined here. |
-| $x, $y                  | _empty_                                    | Needed for x/y coordinates of iCursor | 
+| $iCursorColor           | rgba(150,150,150,.75)                          | Use any color you want.               |
+| $iCursorMinHeight       | 24                                             | Minimum height of the cursor in px.   |
+| $iCursorMaxHeight       | 100                                            | Maximum height of the cursor in px.   |
+| $iCursorPointerSize     | 20                                             | Size of the pointer in px             | 
+| $iCursorPointerRadius   | ($iCursorPointerSize / 2)                      | Sets the round corners automatically. |
+| $iCursorOpacity         | 1                                              | 1 = no transparency<br/>0 = full transparency<br/>Use .5 for 50% transparency<br/>Note that any transparency value with add additional transparency if you have defined iCursorColor as an rgba() color with alpha set to < 1 |
+| $iCursorTransitionSpeed | 0.2                                            | How fast iCursor transforms between states |
+| $iCursorTextWidth       | 6                                              | The width of the iCursor text cursor ("I-Beam") |
+| $iCursorTextRadius      | ($iCursorTextWidth / 2)                        | Do not change.                        |
+| $iCursorArea            | (Math.pow($iCursorPointerRadius, 2) * Math.PI) | Do not change. Calculates the number of pices in the pointer. | 
+| $iCursorPosColorR       | _empty_                                        | Color Value of Red in RGB of Pixel below Cursor Val. Do not populate. |
+| $iCursorPosColorG       | _empty_                                        | Color Value of Green in RGB of Pixel below Cursor Val. Do not populate. |
+| $iCursorPosColorB       | _empty_                                        | Color Value of Blue in RGB of Pixel below Cursor Val. Do not populate. |
+| $iCursorBackgroundBrightness | (Math.sqrt(0.299 * Math.pow($iCursorPosColorR, 2) + 0.587 * Math.pow($iCursorPosColorG, 2) + 0.114 * Math.pow($iCursorPosColorB, 2))) | Calculates the brightness of an RGB color |
+| $iCursorMixBlendMode    | difference                                     | Value for the CSS mix-blend-mode rule. |
+| $iCursorFilter          | grayscale(1)                                   | Use grayscale(1) to apply grayscale. (Doesn't seem to work in all browsers.) | 
+| $iCursorIdleCheck       | true                                           | Set to true, if cursor should hide after $iCursorIdleTime. Set to false to keep the cursor always visible.      | 
+| $iCursorIdleTime        | 3500                                           | Time in ms until the cursor fades away | 
+| $iCursorTimeout         | null                                           | Do not change this!      | 
+| $textElements           | h1, h2, h3, h4, h5, h6, p                      | The HTML elements to which the text cursor applies. Inline Elements are automatically covered and don’t need to be declared explicitly unless you use them not as a child of any of the elements defined here. |
+| $x, $y                  | _empty_                                        | Needed for x/y coordinates of iCursor | 
 
 
 ### Example
@@ -94,6 +99,11 @@ var $iCursorOpacity = "1";
 var $iCursorTransitionSpeed = "0.2";
 var $iCursorTextWidth = "6";
 var $iCursorTextRadius = ($iCursorTextWidth / 2);
+var $iCursorArea = (Math.pow($iCursorPointerRadius, 2) * Math.PI);
+var $iCursorPosColorR = "127";
+var $iCursorPosColorG = "127";
+var $iCursorPosColorB = "127";
+var $iCursorBackgroundBrightness = (Math.sqrt(0.299 * Math.pow($iCursorPosColorR, 2) + 0.587 * Math.pow($iCursorPosColorG, 2) + 0.114 * Math.pow($iCursorPosColorB, 2)));
 var $iCursorMixBlendMode = "normal";
 var $iCursorFilter = "grayscale(1)";
 var $iCursorIdleCheck = "true";
@@ -128,7 +138,7 @@ If the pointer hovers over any text, the cursor gets the text line height (not t
 Apple’s pointer also checks the brightness of the area below the current cursor position (x/y + cursor size):
 * If the average brightness is dark, the pointer becomes bright.
 * If the average brightness is bright, the pointer becomes dark. Just getting the background-color of the objects below the pointer is obviously not useful. The brightness of everything below the pointer needs to be calculated, and then $iCursorColor needs to be set accordingly.
-
+This has not been implemented yet.
 
 ### Button behavior
 Apple’s iPadOS pointer also has specific behavior for hovering over buttons.
