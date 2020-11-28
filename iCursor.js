@@ -1,4 +1,4 @@
-﻿/*
+/*
  iCursor - An emulation of the awesome iPadOS cursor. WIP.
 
  Author: https://www.linkedin.com/in/stefangentz/
@@ -6,24 +6,28 @@
 
  See the documentation here:
  https://github.com/StefanGentz/iCursor/blob/main/README.md
- 
- codepen: https://codepen.io/stefan-gentz/pen/KKMjYoK
 */
 
 var $iCursorVersion = "0.7";
 
 var $iCursorID = "iCursor";
 var $iCursorElement = "<div id=\"" + $iCursorID + "\"></div>";
-var $iCursorColor = "rgba(150,150,150,1)";
-var $iCursorMinHeight = "22";
+var $iCursorColor = "rgba(150,150,150,.5)";
+var $iCursorMinHeight = "24";
 var $iCursorMaxHeight = "100";
-var $iCursorPointerSize = "20";
+var $iCursorPointerSize = "38";
 var $iCursorPointerRadius = ($iCursorPointerSize / 2);
-var $iCursorOpacity = "0.5";
+var $iCursorArea = (Math.pow($iCursorPointerRadius, 2) * Math.PI);
+var $iCursorPosColorR = "127";
+var $iCursorPosColorG = "127";
+var $iCursorPosColorB = "127";
+var $iCursorBackgroundBrightness = (Math.sqrt(0.299 * Math.pow($iCursorPosColorR, 2) + 0.587 * Math.pow($iCursorPosColorG, 2) + 0.114 * Math.pow($iCursorPosColorB, 2)));
+console.log("$iCursorBackgroundBrightness: " + $iCursorBackgroundBrightness)
+var $iCursorOpacity = "1";
 var $iCursorTransitionSpeed = "0.2";
 var $iCursorTextWidth = "6";
 var $iCursorTextRadius = ($iCursorTextWidth / 2);
-var $iCursorMixBlendMode = "normal";
+var $iCursorMixBlendMode = "difference";
 var $iCursorFilter = "grayscale(1)"; // use grayscale(1); to apply grayscale. Doesn't seem to work.
 var $iCursorIdleCheck = "true"; // Set to true, if cursor should hide after $iCursorIdleTime. Set to false to keep the cursor always visible.
 var $iCursorIdleTime = "3500"; // Time in ms until the cursor fades away
